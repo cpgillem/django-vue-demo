@@ -1,11 +1,25 @@
 from django.contrib.auth.models import User
-from lists.models import List, Item
+from lists.models import List, Item, Profile
 from rest_framework import serializers
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'first_name', 'last_name')
+        fields = ('username', 'email', 'first_name', 'last_name')
+    
+
+class ProfileSerializer(serializers.HyperlinkedModelSerializer):
+    user = UserSerializer(many=False, read_only=False)
+    
+    lists = serializers.HyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name='list-detail'
+    )
+
+    class Meta:
+        model = Profile
+        fields = ('url', 'user', 'lists')
 
 
 class ListSerializer(serializers.HyperlinkedModelSerializer):
@@ -17,8 +31,8 @@ class ListSerializer(serializers.HyperlinkedModelSerializer):
 
     owner = serializers.HyperlinkedRelatedField(
         many=False,
-        queryset=User.objects.all(),
-        view_name='user-detail'
+        queryset=Profile.objects.all(),
+        view_name='profile-detail'
     )
 
     class Meta:

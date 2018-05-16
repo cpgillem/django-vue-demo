@@ -1,17 +1,17 @@
 from django.contrib.auth.models import User
-from lists.models import List, Item
+from lists.models import List, Item, Profile
 from rest_framework import viewsets
-from lists.serializers import UserSerializer, ListSerializer, ItemSerializer
+from lists.serializers import ProfileSerializer, ListSerializer, ItemSerializer
 
 from django.shortcuts import render
 from django.http import HttpResponse
 
-class UserViewSet(viewsets.ModelViewSet):
+class ProfileViewSet(viewsets.ModelViewSet):
     """
     API Endpoint for Users.
     """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
 
 class ListViewSet(viewsets.ModelViewSet):
     """
