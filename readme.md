@@ -47,7 +47,7 @@ A list represents a collection of items. It has a title and a one-to-many relati
 
 An item has a title and a boolean representing whether it is archived, checked, done, etc.
 
-### User
-`url: /api/users/`
+### Profile
+`url: /api/profiles/`
 
-Users are used to authenticate to the API. They also own multiple lists.
+Profiles represent users who own multiple lists.
