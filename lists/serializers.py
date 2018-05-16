@@ -9,7 +9,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
-    user = UserSerializer(many=False, read_only=False)
+    user = UserSerializer(many=False, read_only=True)
     
     lists = serializers.HyperlinkedRelatedField(
         many=True,
