@@ -10,6 +10,10 @@ router.register(r'lists', views.ListViewSet)
 router.register(r'items', views.ItemViewSet)
 
 urlpatterns = [
+    # Single-page frontend view.
+    path(r'', views.index, name='index'),
+
+    # API Views.
     url(r'api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path(r'api/', include(router.urls)),
 ]

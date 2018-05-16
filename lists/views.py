@@ -6,6 +6,9 @@ from lists.serializers import ProfileSerializer, ListSerializer, ItemSerializer
 from django.shortcuts import render
 from django.http import HttpResponse
 
+def index(request):
+    return render(request, 'index.html')
+
 class ProfileViewSet(viewsets.ModelViewSet):
     """
     API Endpoint for Users.
