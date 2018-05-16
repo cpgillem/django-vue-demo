@@ -9,6 +9,28 @@ This is a simple list-keeping app that will serve to demonstrate the use of Djan
 - Vue
 - Webpack
 
+## Requirements
+
+- SQLite 3
+- Python 3.6.5
+- pip
+    - django
+    - djangorestframework
+
+## Setup
+
+1. Clone the project.
+   `git clone https://github.com/cpgillem/django-vue-demo.git`
+
+1. Copy the settings.py.example file and fill in the SECRET_KEY setting.
+   `cd django-vue-demo && cp django_vue_demo/settings.py.example django_vue_demo/settings.py`
+
+1. Run the migrations.
+   `python manage.py migrate`
+
+1. Run the server.
+   `python manage.py runserver`
+
 ## API Reference
 
 ### List
