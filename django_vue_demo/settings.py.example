@@ -50,7 +50,9 @@ ROOT_URLCONF = 'django_vue_demo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,8 +67,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'django_vue_demo.wsgi.application'
 
-
-
+STATICFILES_DIRS = (
+    # Collect static JavaScript assets from webpack's output directory.
+    os.path.join(BASE_DIR, 'dist'), 
+)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/static/'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
