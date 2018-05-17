@@ -10,7 +10,7 @@ module.exports = {
     mode: 'none',
 
     output: {
-        path: path.resolve('./dist'),
+        path: path.resolve('./assets/bundles'),
         filename: '[name]-[hash].js',
     },
 
