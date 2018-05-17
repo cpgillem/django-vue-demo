@@ -4,10 +4,10 @@ This is a simple list-keeping app that will serve to demonstrate the use of Djan
 
 ## Technologies Used
 
-- Django
-- Django REST Framework
-- Vue
-- Webpack
+- [Django](http://djangoproject.com)
+- [Django REST Framework](http://www.django-rest-framework.org/)
+- [Vue](http://vuejs.org)
+- [Webpack](http://webpack.js.org)
 
 ## Requirements
 
