@@ -14,8 +14,6 @@ This is a simple list-keeping app that will serve to demonstrate the use of Djan
 - SQLite 3
 - Python 3.6.5
 - pip
-    - django
-    - djangorestframework
 - npm
 
 ## Setup
@@ -27,6 +25,10 @@ This is a simple list-keeping app that will serve to demonstrate the use of Djan
 1. Change directories.
 
    `cd django-vue-demo`
+
+1. Install dependencies. If you need to use a virtualenv, now is the time to equip it.
+
+   `pip install -r requirements.txt`
 
 1. Copy the settings.py.example file and fill in the SECRET_KEY setting.
 
