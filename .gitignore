@@ -11,6 +11,7 @@ media
 static
 
 ### Frontend ###
+node_modules
 dist
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
