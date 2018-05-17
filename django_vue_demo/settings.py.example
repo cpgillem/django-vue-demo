@@ -51,7 +51,6 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'dist')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -69,7 +68,7 @@ WSGI_APPLICATION = 'django_vue_demo.wsgi.application'
 
 STATICFILES_DIRS = (
     # Collect static JavaScript assets from webpack's output directory.
-    os.path.join(BASE_DIR, 'dist'), 
+    os.path.join(BASE_DIR, 'assets'), 
 )
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
@@ -91,7 +90,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
@@ -129,4 +127,11 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     )
+}
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'bundles/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+    }
 }
