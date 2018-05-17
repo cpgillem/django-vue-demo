@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default {
     // Takes a username, password, and callback function. The callback function takes a boolean.
-    login (username, password, next) {
+    login(username, password, next) {
         if (localStorage.token) {
             // If the token already exists, send true to the callback.
             next(true);
@@ -37,4 +37,19 @@ export default {
     loggedIn() {
         return !!localStorage.token;
     },
+
+    // Takes a callback function to be called upon retrieval of the user. 
+    // This function takes an object representing the user as an argument.
+    getUser(next) {
+        if (this.loggedIn()) {
+            axios.get('/rest-auth/user/', {
+                headers: {
+                    'Authorization': 'Token ' + this.getToken(),
+                }
+            }).then(response => {
+                // Send the user to the callback function.
+                next(response.data);
+            });
+        }
+    }
 }
