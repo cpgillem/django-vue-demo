@@ -23,7 +23,12 @@ function authGuard(to, from, next) {
 const routes = [
     {
         path: '/',
-        component: Landing
+        component: Landing,
+        beforeEnter(to, from, next) {
+            if (auth.loggedIn()) {
+                next('/home');
+            }
+        }
     },
     {
         path: '/home',
