@@ -16,6 +16,7 @@ This is a simple list-keeping app that will serve to demonstrate the use of Djan
 - pip
     - django
     - djangorestframework
+- npm
 
 ## Setup
 
@@ -23,9 +24,21 @@ This is a simple list-keeping app that will serve to demonstrate the use of Djan
 
    `git clone https://github.com/cpgillem/django-vue-demo.git`
 
+1. Change directories.
+
+   `cd django-vue-demo`
+
 1. Copy the settings.py.example file and fill in the SECRET_KEY setting.
 
-   `cd django-vue-demo && cp django_vue_demo/settings.py.example django_vue_demo/settings.py`
+   `cp django_vue_demo/settings.py.example django_vue_demo/settings.py`
+
+1. Install the npm dependencies.
+
+   `npm install`
+
+1. Run webpack.
+
+   `npx webpack`
 
 1. Run the migrations.
 
@@ -34,6 +47,10 @@ This is a simple list-keeping app that will serve to demonstrate the use of Djan
 1. Run the server.
 
    `python manage.py runserver`
+
+## Compiling Assets
+
+To compile the frontend's assets, run `npx webpack`. This should place a bundle in the assets/bundles directory. After running `python manage.py collectstatic`, this file should be available to the Django.
 
 ## API Reference
 
