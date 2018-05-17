@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var BundleTracker = require('webpack-bundle-tracker');
+var VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
     context: __dirname,
@@ -16,9 +17,15 @@ module.exports = {
 
     plugins: [
         new BundleTracker({ filename: './webpack-stats.json' }),
+        new VueLoaderPlugin(),
     ],
 
     module: {
-        
+        rules: [
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            },
+        ]
     },
 }
