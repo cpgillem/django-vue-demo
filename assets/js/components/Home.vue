@@ -1,10 +1,17 @@
 <template>
     <div>
-        {{ lists }}
+        <h1>Lists</h1>
+        <ul>
+            <li v-for="list in lists" v-bind:key="list.url">
+                <List v-bind:list="list"/>
+            </li>
+        </ul>
     </div>
 </template>
 
 <script>
+import List from './List.vue';
+
 import axios from 'axios';
 import auth from '../auth';
 
@@ -31,6 +38,9 @@ export default {
                 this.lists = res.data;
             });
         }
+    },
+    components: {
+        List
     }
 }
 </script>
