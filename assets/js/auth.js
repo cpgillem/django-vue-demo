@@ -27,14 +27,14 @@ export default {
     },
 
     getToken() {
-
+        return localStorage.token;
     },
 
     logout() {
-
+        delete localStorage.token;
     },
 
     loggedIn() {
-        return false;
+        return !!localStorage.token;
     },
 }
