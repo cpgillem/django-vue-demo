@@ -7,8 +7,18 @@ import Home from './components/Home.vue';
 import Login from './components/Login.vue';
 import Register from './components/Register.vue';
 
+import auth from './auth';
+
 Vue.config.productionTip = false
 Vue.use(VueRouter);
+
+function authGuard(to, from, next) {
+    if (auth.loggedIn()) {
+        next();
+    } else {
+        next('/login');
+    }
+}
 
 const routes = [
     {
@@ -17,7 +27,8 @@ const routes = [
     },
     {
         path: '/home',
-        component: Home
+        component: Home,
+        beforeEnter: authGuard,
     },
     {
         path: '/login',
@@ -27,10 +38,17 @@ const routes = [
         path: '/register',
         component: Register
     },
+    {
+        path: '/logout',
+        beforeEnter(to, from, next) {
+            auth.logout();
+            next('/');
+        }
+    }
 ];
 
 const router = new VueRouter({
-    routes
+    routes,
 });
 
 new Vue({
