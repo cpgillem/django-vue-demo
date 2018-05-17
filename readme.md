@@ -56,3 +56,4 @@ Profiles represent users who own multiple lists.
 
 - https://ariera.github.io/2017/09/26/django-webpack-vue-js-setting-up-a-new-project-that-s-easy-to-develop-and-deploy-part-1.html
 - https://github.com/michaelbukachi/django-vuejs-tutorial/wiki/Django-Vue.js-Integration-Tutorial
+- https://owais.lone.pw/blog/webpack-plus-reactjs-and-django/
