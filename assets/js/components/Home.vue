@@ -1,4 +1,4 @@
-<template>
+    <template>
     <div>
         <h1>Lists</h1>
         <button @click="createList">New List</button>
@@ -6,7 +6,7 @@
             <li v-for="list in lists" v-bind:key="list.url">
                 <List
                     v-bind:list="list" 
-                    v-on:select-list="selectedList = list"
+                    v-on:select-list="selectedListUrl = list.url"
                     v-on:update-list="updateList"
                     v-on:delete-list="deleteList"
                 />
@@ -38,13 +38,35 @@ export default {
             // The logged in user.
             user: null,
 
-            // The currently selected list.
-            selectedList: null,
+            // The currently selected list url.
+            selectedListUrl: null,
         };
     },
 
+    computed: {
+        // The currently selected list.
+        selectedList() {
+            var filter = this.lists.filter(list => {
+                return list.url == this.selectedListUrl;
+            });
+
+            // If the list was found, return it.
+            if (filter.length > 0) {
+                return filter[0];
+            } else {
+                return null;
+            }
+        }
+    },
+
     created() {
-        this.fetchData();
+        // Fetch all the list and user data.
+        this.fetchData(() => {
+            // Select the first list if there are any, after the data has been fetched.
+            if (this.lists.length > 0) {
+                this.selectedListUrl = this.lists[0].url;
+            }
+        });
     },
 
     watch: {
@@ -53,17 +75,18 @@ export default {
 
     methods: {
         // Load all lists and their items.
-        fetchData() {
+        fetchData(then) {
             axios.get('/api/lists/', {
                 headers: auth.getHeaders(),
             }).then(res => {
                 // Once the lists are loaded, store them in the list variable.
                 this.lists = res.data;
-            });
-            
-            // Retrieve the current user.
-            auth.getUser(u => {
-                this.user = u;
+
+                // Retrieve the current user.
+                auth.getUser(u => {
+                    this.user = u;
+                    if (then) then();
+                });
             });
         },
 
