@@ -3,9 +3,15 @@ from lists.models import List, Item, Profile
 from rest_framework import serializers
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    profile = serializers.HyperlinkedRelatedField(
+        many=False,
+        read_only=True,
+        view_name='profile-detail'
+    )
+    
     class Meta:
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name')
+        fields = ('username', 'email', 'first_name', 'last_name', 'profile')
     
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
