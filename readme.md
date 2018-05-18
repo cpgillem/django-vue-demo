@@ -2,6 +2,8 @@
 
 This is a simple list-keeping app that will serve to demonstrate the use of Django in conjunction with the Vue frontend framework.
 
+For a step-by-step guide to setting up a minimal version of this project, see the [Tutorial](https://github.com/cpgillem/django-vue-demo/wiki/Tutorial).
+
 ## Technologies Used
 
 - [Django](http://djangoproject.com)
