@@ -14,6 +14,7 @@
         </ul>
         <h1>Items</h1>
         <ListViewer 
+            v-if="selectedList !== null"
             v-bind:list="selectedList" 
             v-on:update-item="updateItem"
             v-on:create-item="createItem"
@@ -61,12 +62,7 @@ export default {
 
     created() {
         // Fetch all the list and user data.
-        this.fetchData(() => {
-            // Select the first list if there are any, after the data has been fetched.
-            if (this.lists.length > 0) {
-                this.selectedListUrl = this.lists[0].url;
-            }
-        });
+        this.fetchData();
     },
 
     watch: {
@@ -85,6 +81,13 @@ export default {
                 // Retrieve the current user.
                 auth.getUser(u => {
                     this.user = u;
+
+                    // Select the first list if there are any, after the data has been fetched.
+                    if (this.lists.length > 0) {
+                        this.selectedListUrl = this.lists[0].url;
+                    }
+
+                    // Run the callback function if there is one.
                     if (then) then();
                 });
             });
@@ -99,6 +102,7 @@ export default {
             }, {
                 headers: auth.getHeaders(),
             }).then(res => {
+                // TODO: Update state more efficiently
                 this.fetchData();
             })
         },
@@ -112,7 +116,7 @@ export default {
             }, {
                 headers: auth.getHeaders(),
             }).then(res => {
-                // TODO: Update selectedList
+                // TODO: Update state more efficiently
                 this.fetchData();
             })
         },
@@ -133,7 +137,6 @@ export default {
                 headers: auth.getHeaders(),
             }).then(res => {
                 // TODO: Update state more efficiently
-                // TODO: Update selectedList
                 this.fetchData();
             });
         },
@@ -143,6 +146,7 @@ export default {
             axios.delete(list.url, {
                 headers: auth.getHeaders(),
             }).then(res => {
+                // TODO: Update state more efficiently
                 this.fetchData();
             });
         },
@@ -152,6 +156,7 @@ export default {
             axios.delete(item.url, {
                 headers: auth.getHeaders(),
             }).then(res => {
+                // TODO: Update state more efficiently
                 this.fetchData();
             });
         },
