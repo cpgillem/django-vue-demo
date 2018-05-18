@@ -2,10 +2,10 @@ import axios from 'axios';
 
 export default {
     // Takes a username, password, and callback function. The callback function takes a boolean.
-    login(username, password, next) {
+    login(username, password, done) {
         if (localStorage.token) {
             // If the token already exists, send true to the callback.
-            next(true);
+            done(true);
         } else {
             // If not, send a request for a new token.
             axios.post('/rest-auth/login/', {
@@ -15,15 +15,40 @@ export default {
                 if (response.data.key) {
                     // If the response has a key string, store that in localStorage.
                     localStorage.token = response.data.key
-                    next(true);
+                    done(true);
                 } else {
                     // If not, there has been an error.
-                    next(false);
+                    done(false);
                 }
             }).catch(error => {
-                next(false);
+                done(false);
             });
         }
+    },
+
+    // Takes a username, password, password confirmation, email, and a callback function.
+    // The callback function takes a boolean as an argument.
+    register(username, password1, password2, email, done) {
+        // If there is someone logged in, log them out.
+        if (this.loggedIn()) {
+            this.logout();
+        }
+
+        // Send a request to create a new user.
+        axios.post('/rest-auth/registration', {
+            username,
+            password1,
+            password2,
+            email,
+        }).then(response => {
+            // If successful, log the user in.
+            if (response.data.key) {
+                localStorage.token = response.data.key;
+                done(true);
+            } else {
+                done(false);
+            }
+        });
     },
 
     getToken() {
@@ -47,7 +72,7 @@ export default {
 
     // Takes a callback function to be called upon retrieval of the user. 
     // This function takes an object representing the user as an argument.
-    getUser(next) {
+    getUser(done) {
         if (this.loggedIn()) {
             axios.get('/rest-auth/user/', {
                 headers: {
@@ -55,7 +80,7 @@ export default {
                 }
             }).then(response => {
                 // Send the user to the callback function.
-                next(response.data);
+                done(response.data);
             });
         }
     }
