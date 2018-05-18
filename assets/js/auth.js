@@ -30,6 +30,13 @@ export default {
         return localStorage.token;
     },
 
+    // Creates a headers object for axios requests.
+    getHeaders() {
+        return {
+            'Authorization': 'Token ' + this.getToken(),
+        };
+    },
+
     logout() {
         delete localStorage.token;
     },
