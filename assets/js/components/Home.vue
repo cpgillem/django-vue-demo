@@ -83,7 +83,7 @@ export default {
                     this.user = u;
 
                     // Select the first list if there are any, after the data has been fetched.
-                    if (this.lists.length > 0) {
+                    if (this.selectedListUrl == null && this.lists.length > 0) {
                         this.selectedListUrl = this.lists[0].url;
                     }
 
