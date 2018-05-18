@@ -22,12 +22,20 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'user', 'lists')
 
 
-class ListSerializer(serializers.HyperlinkedModelSerializer):
-    items = serializers.HyperlinkedRelatedField(
-        many=True,
-        read_only=True,
-        view_name='item-detail'
+class ItemSerializer(serializers.HyperlinkedModelSerializer):
+    parent_list = serializers.HyperlinkedRelatedField(
+        many=False,
+        queryset=List.objects.all(),
+        view_name='list-detail'
     )
+    
+    class Meta:
+        model = Item
+        fields = ('url', 'title', 'archived', 'parent_list')
+        
+
+class ListSerializer(serializers.HyperlinkedModelSerializer):
+    items = ItemSerializer(many=True, read_only=True)
 
     owner = serializers.HyperlinkedRelatedField(
         many=False,
@@ -39,14 +47,3 @@ class ListSerializer(serializers.HyperlinkedModelSerializer):
         model = List
         fields = ('url', 'name', 'items', 'owner')
 
-
-class ItemSerializer(serializers.HyperlinkedModelSerializer):
-    parent_list = serializers.HyperlinkedRelatedField(
-        many=False,
-        queryset=List.objects.all(),
-        view_name='list-detail'
-    )
-    
-    class Meta:
-        model = Item
-        fields = ('url', 'title', 'archived', 'parent_list')
