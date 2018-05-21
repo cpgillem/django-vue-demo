@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1>{{ list.name }}</h1>
         <button class="button" @click="$emit('create-item', list)">New Item</button>
         <ul>
             <li v-for="item in list.items" v-bind:key="item.url">

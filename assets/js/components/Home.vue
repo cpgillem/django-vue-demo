@@ -17,7 +17,6 @@
                 </ul>
             </div>
             <div class="cell small-12 medium-8">
-                <h1>Items</h1>
                 <ListViewer 
                     v-if="selectedList !== null"
                     v-bind:list="selectedList" 
