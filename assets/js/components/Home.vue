@@ -11,6 +11,7 @@
                             v-on:select-list="selectedListUrl = list.url"
                             v-on:update-list="updateList"
                             v-on:delete-list="deleteList"
+                            v-bind:selected="isListSelected(list)"
                         />
                     </li>
                 </ul>
@@ -53,9 +54,7 @@ export default {
     computed: {
         // The currently selected list.
         selectedList() {
-            var filter = this.lists.filter(list => {
-                return list.url == this.selectedListUrl;
-            });
+            var filter = this.lists.filter(this.isListSelected);
 
             // If the list was found, return it.
             if (filter.length > 0) {
@@ -76,6 +75,10 @@ export default {
     },
 
     methods: {
+        isListSelected(list) {
+            return this.selectedListUrl == list.url;
+        },
+
         // Load all lists and their items.
         fetchData(then) {
             axios.get('/api/lists/', {

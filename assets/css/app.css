@@ -16,3 +16,9 @@ div.list-item {
 div.list-item * {
     margin-bottom: 0;
 }
+
+/* Selected items should style differently. */
+div.list-item.selected {
+    border-left: 0.5rem solid green;
+    padding-left: 0.5rem;
+}
