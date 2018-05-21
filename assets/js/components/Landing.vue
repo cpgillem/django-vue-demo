@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="grid-container">
         landing page
     </div>
 </template>
