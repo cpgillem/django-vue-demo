@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="list-item">
         <div v-if="mode === 'show'" class="clearfix">
             <div class="float-left">
                 {{ item.title }}

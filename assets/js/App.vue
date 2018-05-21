@@ -24,7 +24,6 @@ export default {
     name: 'app',
     methods: {
         loggedIn() {
-            console.log('checking logged in');
             return auth.loggedIn();
         },
 

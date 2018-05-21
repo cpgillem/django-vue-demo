@@ -9,9 +9,14 @@ import Register from './components/Register.vue';
 
 import auth from './auth';
 
+/* Import the styling for the app. */
+import '../css/app.css';
+
+/* Configure Vue. */
 Vue.config.productionTip = false
 Vue.use(VueRouter);
 
+/* Create a guard to add to private routes. */
 function authGuard(to, from, next) {
     if (auth.loggedIn()) {
         next();
@@ -20,6 +25,7 @@ function authGuard(to, from, next) {
     }
 }
 
+/* Define the routes. */
 const routes = [
     {
         path: '/',
@@ -47,10 +53,12 @@ const routes = [
     },
 ];
 
+/* Create a router. */
 const router = new VueRouter({
     routes,
 });
 
+/* Create a new Vue instance with the router. */
 new Vue({
     render: h => h(App),
     components: {

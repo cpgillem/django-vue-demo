@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="mode === 'show'" class="clearfix">
+        <div v-if="mode === 'show'" class="clearfix list-item">
             <div class="float-left">
                 <a href="#" @click.prevent="$emit('select-list')"><h3>{{ list.name }}</h3></a>
             </div>
@@ -10,7 +10,7 @@
             </div>
         </div>
 
-        <div v-if="mode === 'edit'">
+        <div v-if="mode === 'edit'" class="list-item">
             <div class="input-group">
                 <input class="input-group-field" type="text" v-model="listData.name"/>
                 <div class="input-group-button">
