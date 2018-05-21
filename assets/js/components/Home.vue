@@ -1,25 +1,31 @@
-    <template>
-    <div>
-        <h1>Lists</h1>
-        <button @click="createList">New List</button>
-        <ul>
-            <li v-for="list in lists" v-bind:key="list.url">
-                <List
-                    v-bind:list="list" 
-                    v-on:select-list="selectedListUrl = list.url"
-                    v-on:update-list="updateList"
-                    v-on:delete-list="deleteList"
+<template>
+    <div class="grid-container">
+        <div class="grid-x grid-padding-x">
+            <div class="cell small-12 medium-6">
+                <h1>Lists</h1>
+                <button class="button" @click="createList">New List</button>
+                <ul>
+                    <li v-for="list in lists" v-bind:key="list.url">
+                        <List
+                            v-bind:list="list" 
+                            v-on:select-list="selectedListUrl = list.url"
+                            v-on:update-list="updateList"
+                            v-on:delete-list="deleteList"
+                        />
+                    </li>
+                </ul>
+            </div>
+            <div class="cell small-12 medium-6">
+                <h1>Items</h1>
+                <ListViewer 
+                    v-if="selectedList !== null"
+                    v-bind:list="selectedList" 
+                    v-on:update-item="updateItem"
+                    v-on:create-item="createItem"
+                    v-on:delete-item="deleteItem"
                 />
-            </li>
-        </ul>
-        <h1>Items</h1>
-        <ListViewer 
-            v-if="selectedList !== null"
-            v-bind:list="selectedList" 
-            v-on:update-item="updateItem"
-            v-on:create-item="createItem"
-            v-on:delete-item="deleteItem"
-        />
+            </div>
+        </div>
     </div>
 </template>
 

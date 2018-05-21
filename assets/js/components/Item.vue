@@ -2,13 +2,19 @@
     <div>
         <div v-if="mode === 'show'">
             {{ item.title }}
-            <button @click="edit()">Edit</button>
-            <button @click="$emit('delete-item', item)">Delete</button>
+            <div class="button-group">
+                <button class="button" @click="edit()">Edit</button>
+                <button class="button alert" @click="$emit('delete-item', item)">Delete</button>
+            </div>
         </div>
 
         <div v-else-if="mode === 'edit'">
-            <input type="text" v-model="itemData.title"/>
-            <button @click="update()">Update</button>
+            <div class="input-group">
+                <input class="input-group-field" type="text" v-model="itemData.title"/>
+                <div class="input-group-button">
+                    <button class="button" @click="update()">Update</button>
+                </div>
+            </div>
         </div>
     </div>
 </template>

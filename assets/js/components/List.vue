@@ -2,13 +2,19 @@
     <div>
         <div v-if="mode === 'show'">
             <a href="#" @click.prevent="$emit('select-list')"><h3>{{ list.name }}</h3></a>
-            <button @click="edit()">Edit</button>
-            <button @click="$emit('delete-list', list)">Delete</button>
+            <div class="button-group">
+                <button class="button" @click="edit()">Edit</button>
+                <button class="button alert" @click="$emit('delete-list', list)">Delete</button>
+            </div>
         </div>
 
         <div v-if="mode === 'edit'">
-            <input type="text" v-model="listData.name"/>
-            <button @click="update()">Update</button>
+            <div class="input-group">
+                <input class="input-group-field" type="text" v-model="listData.name"/>
+                <div class="input-group-button">
+                    <button class="button" @click="update()">Update</button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
