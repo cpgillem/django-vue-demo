@@ -1,7 +1,7 @@
 <template>
     <div class="grid-container">
         <div class="grid-x grid-padding-x">
-            <div class="cell small-12 medium-6">
+            <div class="cell small-12 medium-4">
                 <h1>Lists</h1>
                 <button class="button" @click="createList">New List</button>
                 <ul>
@@ -15,7 +15,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="cell small-12 medium-6">
+            <div class="cell small-12 medium-8">
                 <h1>Items</h1>
                 <ListViewer 
                     v-if="selectedList !== null"

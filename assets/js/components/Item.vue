@@ -1,8 +1,10 @@
 <template>
     <div>
-        <div v-if="mode === 'show'">
-            {{ item.title }}
-            <div class="button-group">
+        <div v-if="mode === 'show'" class="clearfix">
+            <div class="float-left">
+                {{ item.title }}
+            </div>
+            <div class="button-group float-right">
                 <button class="button" @click="edit()">Edit</button>
                 <button class="button alert" @click="$emit('delete-item', item)">Delete</button>
             </div>

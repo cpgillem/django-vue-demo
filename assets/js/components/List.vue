@@ -1,8 +1,10 @@
 <template>
     <div>
-        <div v-if="mode === 'show'">
-            <a href="#" @click.prevent="$emit('select-list')"><h3>{{ list.name }}</h3></a>
-            <div class="button-group">
+        <div v-if="mode === 'show'" class="clearfix">
+            <div class="float-left">
+                <a href="#" @click.prevent="$emit('select-list')"><h3>{{ list.name }}</h3></a>
+            </div>
+            <div class="button-group float-right">
                 <button class="button" @click="edit()">Edit</button>
                 <button class="button alert" @click="$emit('delete-list', list)">Delete</button>
             </div>
