@@ -27,6 +27,8 @@ const routes = [
         beforeEnter(to, from, next) {
             if (auth.loggedIn()) {
                 next('/home');
+            } else {
+                next();
             }
         }
     },
@@ -43,13 +45,6 @@ const routes = [
         path: '/register',
         component: Register
     },
-    {
-        path: '/logout',
-        beforeEnter(to, from, next) {
-            auth.logout();
-            next('/');
-        }
-    }
 ];
 
 const router = new VueRouter({
