@@ -111,7 +111,9 @@ export default {
                 headers: auth.getHeaders(),
             }).then(res => {
                 // TODO: Update state more efficiently
-                this.fetchData();
+                this.fetchData(() => {
+                    this.selectedListUrl = res.data.url;
+                });
             })
         },
 
