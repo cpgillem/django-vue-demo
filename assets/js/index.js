@@ -21,7 +21,7 @@ function authGuard(to, from, next) {
     if (auth.loggedIn()) {
         next();
     } else {
-        next('/login');
+        next('/');
     }
 }
 
