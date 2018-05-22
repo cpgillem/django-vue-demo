@@ -33,7 +33,15 @@ export default {
         }
     },
     methods: {
+        clearErrors() {
+            this.otherError = '';
+            this.usernameError = '';
+            this.passwordError = '';
+        },
+
         login() {
+            this.clearErrors();
+            
             auth.login(this.username, this.password, data => {
                 if (data) {
                     if ('key' in data) {

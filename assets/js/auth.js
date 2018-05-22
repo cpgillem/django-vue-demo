@@ -28,7 +28,7 @@ export default {
     },
 
     // Takes a username, password, password confirmation, email, and a callback function.
-    // The callback function takes a boolean as an argument.
+    // The callback function takes an object as an argument.
     register(username, password1, password2, email, done) {
         // If there is someone logged in, log them out.
         if (this.loggedIn()) {
@@ -45,9 +45,13 @@ export default {
             // If successful, log the user in.
             if (response.data.key) {
                 localStorage.token = response.data.key;
-                done(true);
-            } else {
-                done(false);
+            }
+
+            done(response.data);
+        }).catch(error => {
+            // If there was an error, display the validation errors.
+            if (error.response) {
+                done(error.response.data);
             }
         });
     },
