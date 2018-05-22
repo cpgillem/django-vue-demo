@@ -15,6 +15,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
     """
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
+    
 
 class ListViewSet(viewsets.ModelViewSet):
     """
@@ -22,8 +23,11 @@ class ListViewSet(viewsets.ModelViewSet):
     """
     # TODO: Only show lists for user
     # TODO: Include items for each list
-    queryset = List.objects.all()
     serializer_class = ListSerializer
+
+    def get_queryset(self):
+        return self.request.user.profile.lists.all()
+
 
 class ItemViewSet(viewsets.ModelViewSet):
     """
