@@ -2,12 +2,15 @@
     <div class="grid-container">
         <div class="grid-x">
             <div class="cell small-12 medium-6 medium-offset-3">
+                <p v-if="otherError.length > 0">{{ otherError }}</p>
                 <form @submit.prevent="login">
                     <label for="username">Username
                         <input id="username" name="username" type="text" v-model="username">
+                        <small v-if="usernameError.length > 0">{{ usernameError }}</small>
                     </label>
                     <label for="password">Password
                         <input id="password" name="password" type="password" v-model="password">
+                        <small v-if="passwordError.length > 0">{{ passwordError }}</small>
                     </label>
                     <input class="button" type="submit" value="Login">
                 </form>
@@ -24,14 +27,32 @@ export default {
         return {
             username: '',
             password: '',
+            usernameError: '',
+            passwordError: '',
+            otherError: '',
         }
     },
     methods: {
         login() {
-            auth.login(this.username, this.password, res => {
-                if (res) {
-                    // If the login is successful, redirect to home.
-                    this.$router.push('/home');
+            auth.login(this.username, this.password, data => {
+                if (data) {
+                    if ('key' in data) {
+                        // If the login is successful, redirect to home.
+                        this.$router.push('/home');
+                    } else {
+                        // If there are validation errors, display them.
+                        if ('username' in data) {
+                            this.usernameError = data.username[0];
+                        }
+
+                        if ('password' in data) {
+                            this.passwordError = data.password[0];
+                        }
+
+                        if ('non_field_errors' in data) {
+                            this.otherError = data.non_field_errors[0];
+                        }
+                    }
                 }
             })
         }

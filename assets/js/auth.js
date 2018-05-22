@@ -1,27 +1,28 @@
 import axios from 'axios';
 
 export default {
-    // Takes a username, password, and callback function. The callback function takes a boolean.
+    // Takes a username, password, and callback function. The callback function takes an object.
     login(username, password, done) {
         if (localStorage.token) {
-            // If the token already exists, send true to the callback.
-            done(true);
+            // If the token already exists, send the key to the callback.
+            done({
+                "key": localStorage.token,
+            });
         } else {
             // If not, send a request for a new token.
             axios.post('/rest-auth/login/', {
                 username,
                 password,
             }).then(response => {
-                if (response.data.key) {
+                if ('key' in response.data) {
                     // If the response has a key string, store that in localStorage.
                     localStorage.token = response.data.key
-                    done(true);
-                } else {
-                    // If not, there has been an error.
-                    done(false);
                 }
+                done(response.data);
             }).catch(error => {
-                done(false);
+                if (error.response) {
+                    done(error.response.data);
+                }
             });
         }
     },
