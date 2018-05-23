@@ -5,7 +5,8 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "dev": "python manage.py collectstatic --noinput && webpack"
+    "dev": "webpack",
+    "prod": "webpack && python manage.py collectstatic --noinput"
   },
   "repository": {
     "type": "git",
