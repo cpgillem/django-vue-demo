@@ -14,6 +14,7 @@ static
 node_modules
 webpack-stats.json
 assets/bundles
+assets/js/baseUrl.js
 
 ### System ###
 .DS_Store

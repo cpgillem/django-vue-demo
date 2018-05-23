@@ -33,7 +33,7 @@
 import List from './List.vue';
 import ListViewer from './ListViewer.vue';
 
-import axios from 'axios';
+import ax from '../api';
 import auth from '../auth';
 
 export default {
@@ -80,7 +80,7 @@ export default {
 
         // Load all lists and their items.
         fetchData(then) {
-            axios.get('/api/lists/', {
+            ax.get('/api/lists/', {
                 headers: auth.getHeaders(),
             }).then(res => {
                 // Once the lists are loaded, store them in the list variable.
@@ -104,7 +104,7 @@ export default {
         // Add a new list.
         createList() {
             // Create a new list with default values.
-            axios.post('/api/lists/', {
+            ax.post('/api/lists/', {
                 name: 'New List',
                 owner: this.user.profile,
             }, {
@@ -120,7 +120,7 @@ export default {
         // Add a new item.
         createItem(list) {
             // Create a new item in the list.
-            axios.post('/api/items/', {
+            ax.post('/api/items/', {
                 title: 'New Item',
                 parent_list: list.url,
             }, {
@@ -133,7 +133,7 @@ export default {
 
         // Update a list.
         updateList(list) {
-            axios.put(list.url, list, {
+            ax.put(list.url, list, {
                 headers: auth.getHeaders(),
             }).then(res => {
                 // TODO: Update state more efficiently
@@ -143,7 +143,7 @@ export default {
 
         // Update an item.
         updateItem(item) {
-            axios.put(item.url, item, {
+            ax.put(item.url, item, {
                 headers: auth.getHeaders(),
             }).then(res => {
                 // TODO: Update state more efficiently
@@ -153,7 +153,7 @@ export default {
 
         // Delete a list.
         deleteList(list) {
-            axios.delete(list.url, {
+            ax.delete(list.url, {
                 headers: auth.getHeaders(),
             }).then(res => {
                 // TODO: Update state more efficiently
@@ -163,7 +163,7 @@ export default {
 
         // Delete an item.
         deleteItem(item) {
-            axios.delete(item.url, {
+            ax.delete(item.url, {
                 headers: auth.getHeaders(),
             }).then(res => {
                 // TODO: Update state more efficiently

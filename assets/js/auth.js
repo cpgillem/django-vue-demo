@@ -1,4 +1,4 @@
-import axios from 'axios';
+import ax from './api';
 
 export default {
     // Takes a username, password, and callback function. The callback function takes an object.
@@ -10,7 +10,7 @@ export default {
             });
         } else {
             // If not, send a request for a new token.
-            axios.post('/rest-auth/login/', {
+            ax.post('/rest-auth/login/', {
                 username,
                 password,
             }).then(response => {
@@ -36,7 +36,7 @@ export default {
         }
 
         // Send a request to create a new user.
-        axios.post('/rest-auth/registration', {
+        ax.post('/rest-auth/registration', {
             username,
             password1,
             password2,
@@ -79,7 +79,7 @@ export default {
     // This function takes an object representing the user as an argument.
     getUser(done) {
         if (this.loggedIn()) {
-            axios.get('/rest-auth/user/', {
+            ax.get('/rest-auth/user/', {
                 headers: {
                     'Authorization': 'Token ' + this.getToken(),
                 }
