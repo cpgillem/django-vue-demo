@@ -6,4 +6,4 @@ class IsOwner(permissions.BasePermission):
         if isinstance(object, List):
             return object.owner == request.user.profile
         elif isinstance(object, Item):
-            return object.list.owner == request.user.profile
+            return object.parent_list.owner == request.user.profile
